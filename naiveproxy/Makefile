@@ -38,7 +38,7 @@ include $(INCLUDE_DIR)/package.mk
 
 define Package/naiveproxy
   SECTION:=net
-  CATEGORY:=Network
+  CATEGORY:=HomeISC
   SUBMENU:=Web Servers/Proxies
   TITLE:=Make a fortune quietly
   URL:=https://github.com/klzgrad/naiveproxy

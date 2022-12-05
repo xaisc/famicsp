@@ -23,7 +23,7 @@ include $(INCLUDE_DIR)/package.mk
 
 define Package/microsocks
   SECTION:=net
-  CATEGORY:=Network
+  CATEGORY:=HomeISC
   SUBMENU:=Web Servers/Proxies
   TITLE:=Tiny, portable SOCKS5 server
   URL:=https://github.com/rofl0r/microsocks
