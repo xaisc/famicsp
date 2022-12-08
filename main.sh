@@ -32,19 +32,24 @@ svn export https://github.com/fw876/helloworld/trunk/redsocks2
 ##helloworld's luci-app 
 svn export https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus
 ##jerrykuku's helloworld luci-app
-git clone https://github.com/jerrykuku/openwrt-package
-mv -n openwrt-package/lua-maxminddb ./
-mv -n openwrt-package/luci-app-vssr ./
-mv -n openwrt-package/luci-theme-argon-18.06 ./
-rm -rf openwrt-package
+git clone --depth 1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon luci-theme-argon-18.06
+sed -i 's/LUCI_TITLE:=Argon Theme/LUCI_TITLE:=Argon Theme for Lede or openwrt 18.06/g' luci-theme-argon-18.06/Makefile
+sed -i 's/Package\/luci-theme-argon\/postinst/Package\/luci-theme-argon-18.06\/postinst/g' luci-theme-argon-18.06/Makefile
+git clone --depth 1 https://github.com/jerrykuku/luci-app-argon-config luci-theme-argon-config-18.06
+sed -i 's/luci-app-argon-config/luci-theme-argon-config-18.06/g' luci-theme-argon-config-18.06/Makefile
+sed -i 's/+luci-compat/+luci-compat +luci-theme-argon-18.06/g' luci-theme-argon-config-18.06/Makefile
+git clone --depth 1 https://github.com/jerrykuku/luci-app-vssr
+git clone --depth 1 https://github.com/jerrykuku/lua-maxminddb
 #bypass plug-in
 svn export https://github.com/tianiue/luci-app-bypass/trunk/luci-app-bypass
 cp -r luci-app-bypass/po/zh-cn luci-app-bypass/po/zh_Hans
 ##luci-app-netdate full Chinese edition
 git clone --depth 1 https://github.com/Jason6111/luci-app-netdata luci-app-netdata-cn && sed -i 's/luci-app-netdata/luci-app-netdata-cn/g' luci-app-netdata-cn/Makefile
 cp -r luci-app-netdata-cn/po/zh-cn luci-app-netdata-cn/po/zh_Hans
+mv -n luci-app-netdata-cn/root/etc/netdata/netdata.conf luci-app-netdata-cn/root/etc/netdata/netdata.conf.backup
 ##immortalwrt's luci-app-adbyby-plus,this app plus wget-ssl better then lede's
 svn export https://github.com/immortalwrt/luci/trunk/applications/luci-app-adbyby-plus luci-app-adbyby-plus-wgets-ssl && sed -i 's/luci-app-adbyby-plus/luci-app-adbyby-plus-wgets-ssl/g' luci-app-adbyby-plus-wgets-ssl/Makefile
+cp -r luci-app-adbyby-plus-wgets-ssl/po/zh_Hans luci-app-adbyby-plus-wgets-ssl/po/zh-cn
 svn export https://github.com/immortalwrt/luci/trunk/applications/luci-app-iptvhelper
 cp -r luci-app-iptvhelper/po/zh_Hans luci-app-iptvhelper/po/zh-cn
 svn export https://github.com/immortalwrt/packages/trunk/net/iptvhelper
@@ -69,6 +74,7 @@ git clone --depth 1 https://github.com/ElvenP/luci-app-onliner
 cp -r luci-app-onliner/po/zh-cn luci-app-onliner/po/zh_Hans
 #wrtbwmon's main packages and luci-app
 svn export https://github.com/brvphoenix/luci-app-wrtbwmon/trunk/luci-app-wrtbwmon luci-app-wrtbwmon-brv && sed -i 's/luci-app-wrtbwmon/luci-app-wrtbwmon-brv/g' luci-app-wrtbwmon-brv/Makefile
+cp -r luci-app-wrtbwmon-brv/po/zh_Hans luci-app-wrtbwmon-brv/po/zh-cn
 svn export https://github.com/brvphoenix/wrtbwmon/trunk/wrtbwmon
 ##appfilter's main packages and luci-app
 git clone --depth 1 https://github.com/destan19/OpenAppFilter && mvdir OpenAppFilter
@@ -79,12 +85,14 @@ svn export https://github.com/vernesong/OpenClash/trunk/luci-app-openclash
 svn export https://github.com/sundaqiang/openwrt-packages/trunk/luci-app-wolplus
 
 git clone --depth 1 https://github.com/kiddin9/luci-app-wizard
+cp -r luci-app-wizard/po/zh_Hans luci-app-wizard/po/zh-cn
 
 git clone --depth 1 https://github.com/sirpdboy/luci-app-advanced
 
 git clone --depth 1 -b lede https://github.com/pymumu/luci-app-smartdns
 
 git clone --depth 1 https://github.com/Huangjoe123/luci-app-eqos
+cp -r luci-app-eqos/po/zh_Hans luci-app-eqos/po/zh-cn
 
 #svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-fileassistant
 #svn export https://github.com/immortalwrt/luci/trunk/applications/luci-app-filebrowser
