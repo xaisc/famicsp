@@ -129,7 +129,7 @@ cp -r luci-app-eqos/po/zh_Hans luci-app-eqos/po/zh-cn
 #svn export https://github.com/haiibo/openwrt-packages/trunk/mentohust
 #svn export https://github.com/haiibo/openwrt-packages/trunk/udp2raw
 
-svn export https://github.com/immortalwrt/packages/trunk/libs/libcryptopp
+#svn export https://github.com/immortalwrt/packages/trunk/libs/libcryptopp
 #svn export https://github.com/immortalwrt/packages/trunk/devel/go-rice
 
 git_sparse_clone master "https://github.com/x-wrt/com.x-wrt" "x-wrt" natflow lua-ipops luci-app-macvlan
