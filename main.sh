@@ -59,7 +59,7 @@ mv -n ddns-go/* ./ ; rm -Rf ddns-go ; rm README.md
 ##serverchan's new app
 git clone --depth 1 https://github.com/zzsj0928/luci-app-pushbot
 ##Chinadns_ng's main packages and luci-app web ui
-git clone https://github.com/zfl9/chinadns-ng
+#git clone https://github.com/zfl9/chinadns-ng
 git clone -b luci https://github.com/pexcn/openwrt-chinadns-ng.git luci-app-chinadns-ng
 ##poweroff for device 
 git clone --depth 1 https://github.com/esirplayground/luci-app-poweroff
