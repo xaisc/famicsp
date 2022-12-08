@@ -58,6 +58,7 @@ svn export https://github.com/Lienol/openwrt-package/trunk/luci-app-control-time
 svn export https://github.com/Lienol/openwrt-package/trunk/luci-app-control-webrestriction luci-app-control-webrestriction-byLienol && sed -i 's/luci-app-control-webrestriction/luci-app-control-webrestriction-byLienol/g' luci-app-control-webrestriction-byLienol/Makefile
 svn export https://github.com/Lienol/openwrt-package/trunk/luci-app-control-weburl luci-app-control-weburl-byLienol && sed -i 's/luci-app-control-weburl/luci-app-control-weburl-byLienol/g' luci-app-control-weburl-byLienol/Makefile
 svn export https://github.com/Lienol/openwrt-package/trunk/luci-app-timecontrol luci-app-timecontrol-byLienol && sed -i 's/luci-app-timecontrol/luci-app-timecontrol-byLienol/g' luci-app-timecontrol-byLienol/Makefile
+svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome
 ##ddns-go's luci-app and main package
 git clone https://github.com/sirpdboy/luci-app-ddns-go.git ddns-go
 mv -n ddns-go/* ./ ; rm -Rf ddns-go ; rm README.md
