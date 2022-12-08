@@ -70,7 +70,7 @@ git clone -b luci https://github.com/pexcn/openwrt-chinadns-ng.git luci-app-chin
 git clone --depth 1 https://github.com/esirplayground/luci-app-poweroff
 cp -r luci-app-poweroff/po/zh-cn luci-app-poweroff/po/zh_Hans
 ##onliner's luci-app need +luci-app-wrtbwmon
-git clone --depth 1 https://github.com/ElvenP/luci-app-onliner
+git clone --depth 1 https://github.com/ElvenP/luci-app-onliner && sed -i 's/+luci-app-wrtbwmon/+luci-app-wrtbwmon-brv/g' luci-app-onliner/Makefile
 cp -r luci-app-onliner/po/zh-cn luci-app-onliner/po/zh_Hans
 #wrtbwmon's main packages and luci-app
 svn export https://github.com/brvphoenix/luci-app-wrtbwmon/trunk/luci-app-wrtbwmon luci-app-wrtbwmon-brv && sed -i 's/luci-app-wrtbwmon/luci-app-wrtbwmon-brv/g' luci-app-wrtbwmon-brv/Makefile
