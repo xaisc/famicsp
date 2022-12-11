@@ -8,30 +8,10 @@ require("table")
 function gen_template_config()
 	local b
 	local d=""
-	local rcauto=uci:get("dhcp","@dnsmasq[0]","resolvfile")
-	if (rcauto == nil) then
-		for fle in fs.dir("/var/etc") do
-			if fle ~="." and fle ~=".."then
-				tf="/var/etc/"..fle
-				if string.match(tf,"/var/etc/dnsmasq.conf.") then
-					if tf and fs.access(tf) then
-						for le in io.lines(tf) do
-							sf=string.match (le,"^resolv%-file=(%S+)")
-								if (sf ~=nil) then
-								rcauto=sf
-							end
-						end
-					end
-				end
-			end
-		end
-	end
-	if rcauto and fs.access(rcauto) then
-		for cnt in io.lines(rcauto) do
-			b=string.match (cnt,"^[^#]*nameserver%s+([^%s]+)$")
-			if (b~=nil) then
-				d=d.."    - "..b.."\n"
-			end
+	for cnt in io.lines("/tmp/resolv.conf.d/resolv.conf.auto") do
+		b=string.match (cnt,"^[^#]*nameserver%s+([^%s]+)$")
+		if (b~=nil) then
+			d=d.."  - "..b.."\n"
 		end
 	end
 	local f=io.open("/usr/share/AdGuardHome/AdGuardHome_template.yaml", "r+")
@@ -90,7 +70,7 @@ o.template = "AdGuardHome/yamleditor"
 if not fs.access(binpath) then
 	o.description=translate("WARNING!!! no bin found apply config will not be test")
 end
---- log 
+--- log
 if (fs.access("/tmp/AdGuardHometmpconfig.yaml")) then
 local c=fs.readfile("/tmp/AdGuardHometest.log")
 if (c~="") then
