@@ -13,7 +13,7 @@ web_session_ttl: 720
 dns:
   bind_hosts:
     - 0.0.0.0
-  port: 1745
+  port: 53
   statistics_interval: 90
   querylog_enabled: true
   querylog_file_enabled: true
@@ -31,12 +31,7 @@ dns:
   ratelimit_whitelist: []
   refuse_any: false
   upstream_dns:
-    - 223.5.5.5
-    - 114.114.114.114
-    - 211.137.130.3
-    - 211.137.130.19
-    - 2409:8070:2000:f000::1
-    - 2409:8070:2000:f100::1
+    - 127.0.0.1:5553
   upstream_dns_file: ""
   bootstrap_dns:
     - 119.29.29.29
@@ -75,10 +70,8 @@ dns:
   parental_cache_size: 1048576
   cache_time: 30
   rewrites:
-    - domain: _vlmcs._tcp.famic.local
-      answer: kms.famic.local
     - domain: kms.famic.local
-      answer: 192.168.1.10
+      answer: 192.168.1.250
   blocked_services: []
   upstream_timeout: 10s
   private_networks: []
@@ -110,6 +103,38 @@ filters:
     url: https://anti-ad.net/easylist.txt
     name: 'CHN: anti-AD'
     id: 1628750871
+  - enabled: true
+    url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_29.txt
+    name: 'CHN: AdRules DNS List'
+    id: 1671263647
+  - enabled: true
+    url: https://easylist-downloads.adblockplus.org/easylist.txt
+    name: EasyList主要规则
+    id: 1671263648
+  - enabled: true
+    url: https://easylist-downloads.adblockplus.org/easyprivacy.txt
+    name: EasyPrivacy（防隐私跟踪列表）
+    id: 1671263649
+  - enabled: true
+    url: https://easylist-downloads.adblockplus.org/easylistchina.txt
+    name: EasyList的中文补充规则
+    id: 1671263650
+  - enabled: true
+    url: https://www.i-dont-care-about-cookies.eu/abp/
+    name: 屏蔽网站的 cookies 相关的警告
+    id: 1671263651
+  - enabled: true
+    url: https://cdn.staticaly.com/gh/o0HalfLife0o/list/master/ad-pc.txt
+    name: 合并自乘风视频广告过滤规则、Easylist、EasylistChina、EasyPrivacy、CJX'sAnnoyance，以及补充的一些规则
+    id: 1671263652
+  - enabled: true
+    url: https://cdn.staticaly.com/gh/xinggsf/Adblock-Plus-Rule/master/mv.txt
+    name: 乘风视频规则 (周更)，可过滤秒跳国内三大视频站片头广告和黑屏
+    id: 1671263653
+  - enabled: true
+    url: https://cdn.staticaly.com/gh/o0HalfLife0o/list/master/ad-edentw.txt
+    name: 合并自 Adblock Warning Removal List、ABP filters、anti-adblock-killer-filters
+    id: 1671263654
 whitelist_filters: []
 user_rules: []
 dhcp:
