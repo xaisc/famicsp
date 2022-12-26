@@ -8,18 +8,22 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ddnsgo
-PKG_VERSION:=4.2.1
-PKG_RELEASE:=$(AUTORELEASE)
+PKG_VERSION:=4.4.0
+PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/jeessy2/ddns-go.git
-PKG_SOURCE_VERSION:=40910a944dda1f4d843e77531bd32c630671954a
-PKG_MIRROR_HASH:=skip
+PKG_SOURCE_VERSION:=ae784700c460a9e810b59094c19f81ca636d8d50
+PKG_MIRROR_HASH:=05e97922376de086f6b974938a135fd487d307f8ed028661c16328f3400ba619
 
 PKG_LICENSE:=AGPL-3.0-only
 PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:=herboy2008 <herboy2008@gmail.com>
+
+PKG_CONFIG_DEPENDS:= \
+	CONFIG_DDNS-GO_COMPRESS_GOPROXY \
+	CONFIG_DDNS-GO_COMPRESS_UPX
 
 PKG_BUILD_DEPENDS:=golang/host
 PKG_BUILD_PARALLEL:=1
@@ -41,10 +45,26 @@ define Package/ddnsgo
   URL:=https://github.com/jeessy2/ddns-go
 endef
 
-define Package/ddnsgo/description
+define Package/$(PKG_NAME)/description
   ddns-go is a automatically obtain your public IPv4 or IPv6 address and resolve it to the corresponding domain name service,
   support Alidns Dnspod Cloudflare Hicloud Callback Baiducloud porkbun GoDaddy Google Domains.
 endef
+
+define Package/$(PKG_NAME)/config
+config DDNS-GO_COMPRESS_GOPROXY
+	bool "Compiling with GOPROXY proxy"
+	default n
+
+config DDNS-GO_COMPRESS_UPX
+	bool "Compress executable files with UPX"
+	depends on !mips64
+	default n
+endef
+
+ifeq ($(CONFIG_DDNS-GO_COMPRESS_GOPROXY),y)
+	export GO111MODULE=on
+	export GOPROXY=https://goproxy.baidu.com
+endif
 
 define Package/$(PKG_NAME)/postinst
 #!/bin/sh
@@ -53,7 +73,14 @@ if [ -z "$${IPKG_INSTROOT}" ]; then
 fi
 endef
 
-define Package/ddnsgo/install
+define Build/Compile
+	$(call GoPackage/Build/Compile)
+ifneq ($(CONFIG_DDNS-GO_COMPRESS_UPX),)
+	$(STAGING_DIR_HOST)/bin/upx --lzma --best $(GO_PKG_BUILD_BIN_DIR)/ddns-go
+endif
+endef
+
+define Package/$(PKG_NAME)/install
 	$(call GoPackage/Package/Install/Bin,$(1))
 
 	$(INSTALL_DIR) $(1)/etc/init.d
